@@ -134,6 +134,7 @@ namespace CREDMicroService.Controllers
         }
 
 
+        //method to get current user
         private UserLogin GetCurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
