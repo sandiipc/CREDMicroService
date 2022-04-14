@@ -49,6 +49,7 @@ namespace CREDMicroService.Controllers
 
         // POST api/<UserController>
         [HttpPost]
+        [Route("create")]
         [Authorize]
         public IActionResult Post([FromBody] User model)
         {
@@ -57,22 +58,22 @@ namespace CREDMicroService.Controllers
                 db.Users.Add(model);
                 db.SaveChanges();
 
-                return StatusCode(StatusCodes.Status201Created, model);
+                return Created("~api/user/created", new { statusCode = StatusCodes.Status201Created, responseObject = model });
 
             }
             catch (Exception ex)
             {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { statusCode = StatusCodes.Status500InternalServerError, errorMsg = ex.Message });
             }
 
 
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
+        // POST api/<UserController>/5
+        [HttpPost]
+        [Route("edit/{id}")]
         [Authorize]
-        public IActionResult Put(int id, [FromBody] UpdatedUser model)
+        public IActionResult Post(int id, [FromBody] UpdatedUser model)
         {
             try
             {
@@ -85,11 +86,11 @@ namespace CREDMicroService.Controllers
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    return StatusCode(StatusCodes.Status200OK, "User successfully updated");
+                    return StatusCode(StatusCodes.Status200OK, new { statusCode = StatusCodes.Status200OK, responseObject = model });
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, "User not found");
+                    return StatusCode(StatusCodes.Status404NotFound, new { statusCode = StatusCodes.Status404NotFound, message = "User not found" });
                 }
                 
 
@@ -97,13 +98,14 @@ namespace CREDMicroService.Controllers
             catch (Exception ex)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { statusCode = StatusCodes.Status500InternalServerError, errorMsg = ex.Message });
             }
 
         }
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
+        // GET api/<UserController>/5
+        [HttpGet]
+        [Route("delete/{id}")]
         [Authorize]
         public IActionResult Delete(int id)
         {
@@ -116,11 +118,11 @@ namespace CREDMicroService.Controllers
                     db.Users.Remove(user);
                     db.SaveChanges();
 
-                    return StatusCode(StatusCodes.Status200OK, "User successfully deleted");
+                    return StatusCode(StatusCodes.Status200OK, new { statusCode = StatusCodes.Status200OK, message = "User successfully deleted" });
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, "User not found");
+                    return StatusCode(StatusCodes.Status404NotFound, new { statusCode = StatusCodes.Status404NotFound, message = "User not found" });
                 }
 
 
@@ -128,7 +130,7 @@ namespace CREDMicroService.Controllers
             catch (Exception ex)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { statusCode = StatusCodes.Status500InternalServerError, errorMsg = ex.Message });
             }
 
         }

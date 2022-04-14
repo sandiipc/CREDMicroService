@@ -16,14 +16,25 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    //"CREDMicroService": {
+    //  "commandName": "Project",
+    //  "launchBrowser": true,
+    //  "launchUrl": "api/user",
+    //  "environmentVariables": {
+    //    "ASPNETCORE_ENVIRONMENT": "Development"
+    //  },
+    //  "applicationUrl": "http://localhost:5000"
+    //}
+
     "CREDMicroService": {
       "commandName": "Project",
+      "dotnetRunMessages": "true",
       "launchBrowser": true,
-      "launchUrl": "api/user",
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5000"
+      "applicationUrl": "https://localhost:44350;http://localhost:56504"
     }
   }
 }
