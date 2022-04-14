@@ -10,9 +10,16 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'sonarqubesvcconn'
+    scannerMode: 'MSBuild'
+    projectKey: 'azure-demo-generator-sandiipc_MyShuttle_AX_4QyXqZxHUG3u6pSo5'
+
 - script: |
     dotnet restore
     dotnet build --configuration Release
+- task: SonarQubeAnalyze@5
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
