@@ -31,7 +31,7 @@ steps:
       Write-Host "Sonar Token - " + $(SONARTOKEN)
       Write-Host "Sonar Project Key - " + $(SONARPROJECTKEY)
       
-      $Token = [System.Text.Encoding]::UTF8.GetBytes($(SONARTOKEN) + ":")
+      $Token = [System.Text.Encoding]::UTF8.GetBytes("a91fcd640eb4d66ce9cfcb346268ca19e2ac275e" + ":")
       $TokenInBase64 = [System.Convert]::ToBase64String($Token)
        
       $basicAuth = [string]::Format("Basic {0}", $TokenInBase64)
