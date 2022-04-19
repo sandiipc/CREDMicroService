@@ -37,7 +37,7 @@ steps:
       $basicAuth = [string]::Format("Basic {0}", $TokenInBase64)
       $Headers = @{ Authorization = $basicAuth }
 
-      Write-Host "Headers - " + $Headers
+      Write-Host "Auth - " + $basicAuth
        
       $QualityGateResult = Invoke-RestMethod -Method Get -Uri http://$(SONARSERVERNAME)/api/qualitygates/project_status?projectKey=$(SONARPROJECTKEY) -Headers $Headers
       $QualityGateResult | ConvertTo-Json | Write-Host
