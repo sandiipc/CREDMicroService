@@ -27,23 +27,7 @@ steps:
     script: |
       # Write your PowerShell commands here.
       
-      [CmdletBinding()]
-      Param(
-          # Define Sonar Token
-          [Parameter (Mandatory=$true)]
-          [ValidateNotNullOrEmpty()]
-          [String] $SONARTOKEN,
       
-          # Define SonarQube Server URI
-          [Parameter (Mandatory=$true)]
-          [ValidateNotNullOrEmpty()]
-          [String] $SONARSERVERNAME,
-      
-          # Define Project Key
-          [Parameter (Mandatory=$true)]
-          [ValidateNotNullOrEmpty()]
-          [String] $SONARPROJECTKEY
-      )
       
       $Token = [System.Text.Encoding]::UTF8.GetBytes($SONARTOKEN + ":")
       $TokenInBase64 = [System.Convert]::ToBase64String($Token)
