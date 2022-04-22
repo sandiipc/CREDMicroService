@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,15 @@ namespace CREDMicroService.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        
+        private readonly IConfiguration _configuration;
         DatabaseContext db;
 
-        public UserController()
+        public UserController(IConfiguration configuration)
         {
-            db = new DatabaseContext();
+            _configuration = configuration;
+            db = new DatabaseContext(_configuration);
+            
         }
 
         // GET: api/<UserController>

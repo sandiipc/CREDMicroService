@@ -20,15 +20,13 @@ namespace CREDMicroService.Controllers
     public class LoginController : ControllerBase
     {
         
-        private IConfiguration _config;
+        private readonly IConfiguration _configuration;
         DatabaseContext db;
 
-
-        public LoginController(IConfiguration config)
+        public LoginController(IConfiguration configuration)
         {
-            _config = config;
-            db = new DatabaseContext();
-
+            _configuration = configuration;
+            db = new DatabaseContext(_configuration);
         }
 
         [AllowAnonymous]
@@ -54,7 +52,7 @@ namespace CREDMicroService.Controllers
 
         private string GenerateToken(UserLogin user)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
@@ -67,7 +65,7 @@ namespace CREDMicroService.Controllers
 
             };
 
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"], _config["Jwt:Audience"], claims,
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims,
                 expires: DateTime.Now.AddMinutes(15), signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
