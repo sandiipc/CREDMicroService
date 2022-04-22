@@ -11,10 +11,7 @@ pool:
 
 steps:
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: 'CREDMicroserviceXUnitTest\*.csproj'
+
 
 - task: SonarQubePrepare@5
   inputs:
@@ -25,6 +22,11 @@ steps:
 - script: |
     dotnet restore
     dotnet build --configuration Release
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'CREDMicroserviceXUnitTest\*.csproj'
 - task: SonarQubeAnalyze@5
 
 - task: PowerShell@2
