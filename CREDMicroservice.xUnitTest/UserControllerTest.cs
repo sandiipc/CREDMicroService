@@ -63,7 +63,7 @@ namespace CREDMicroservice.xUnitTest
         }
 
 
-        [Fact]
+        [Fact(Skip = "while unit test should not create new user")]
         public void CreateUser_DBInsert()
         {
             //arrange
@@ -91,8 +91,8 @@ namespace CREDMicroservice.xUnitTest
             //arrange
             var updatedUser = new UpdatedUser
             {
-                Address = "GUJ",
-                Contact = "0000000000"
+                Address = "IND",
+                Contact = "9999999999"
             };
             var controller = new UserController(configuration);
 
@@ -112,7 +112,7 @@ namespace CREDMicroservice.xUnitTest
             var controller = new UserController(configuration);
 
             //act
-            var actionResult = controller.Delete(6);
+            var actionResult = controller.Delete(11);
             var result = actionResult as ObjectResult;
 
             //assert
@@ -157,6 +157,13 @@ namespace CREDMicroservice.xUnitTest
                     UserId = 4,
                     Name = "Boris Johnson",
                     Address = "UK",
+                    Contact = "1234567890"
+                },
+                new User
+                {
+                    UserId = 5,
+                    Name = "Falana",
+                    Address = "NT",
                     Contact = "1234567890"
                 }
 
