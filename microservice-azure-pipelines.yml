@@ -26,7 +26,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: 'CREDMicroserviceXUnitTest\*.csproj'
+    projects: 'CREDMicroservice.xUnitTest\*.csproj'
 - task: SonarQubeAnalyze@5
 
 - task: PowerShell@2
