@@ -10,6 +10,12 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'CREDMicroserviceXUnitTest\*.csproj'
+
 - task: SonarQubePrepare@5
   inputs:
     SonarQube: 'sonarqubesvcconn'
